@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace TextRPGPrototype_NathanPeach
 {
@@ -13,27 +14,16 @@ namespace TextRPGPrototype_NathanPeach
         static bool gameOver;
         //Global variables
         
-        static char[,] map = new char[,] 
-        {
-            { }, 
-            { }, 
-            { }, 
-            { }, 
-            { }, 
-            { },
-        };
-        static int width = map.GetLength(1);
-        static int height = map.GetLength(0);
-        
         static void Main(string[] args)
         {
+            DisplayMap();
             
             //Game loop
             while (gameOver == false)
             {
                 PlayerControl();
             }
-
+            Console.ReadKey();
         
         
         
@@ -43,7 +33,9 @@ namespace TextRPGPrototype_NathanPeach
         }
         static void DisplayMap()
         {
-
+            string map = @"Map.txt";
+            string display = File.ReadAllText(map);
+            Console.Write(display);
         }
         static void PlayerControl()
         {
