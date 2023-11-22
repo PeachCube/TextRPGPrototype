@@ -16,11 +16,6 @@ namespace TextRPGPrototype_NathanPeach
         static bool gameOver;
         static string map = @"Map.txt";
         static string[] display = File.ReadAllLines(map);
-        struct Position //Position of the player in x - y coordinates.
-        {
-            public int x;
-            public int y;
-        }
         //Global variables
 
         static void Main(string[] args)
@@ -28,13 +23,11 @@ namespace TextRPGPrototype_NathanPeach
             Console.SetWindowSize(130,30);
             DisplayMap();
             Console.SetCursorPosition(10,10);
-            
             //Game loop
             while (gameOver == false)
             {
                 PlayerControl();
             }
-            Console.ReadKey();
         
         
         
@@ -59,10 +52,22 @@ namespace TextRPGPrototype_NathanPeach
         static void PlayerControl()
         {
             Console.ReadKey(true);
-            ConsoleKey input = Console.ReadKey().Key;
+            ConsoleKey input = Console.ReadKey(true).Key;
             if ((input == ConsoleKey.S))
             {
-
+                Console.SetCursorPosition(Console.CursorLeft,Console.CursorTop+1);
+            }
+            if ((input == ConsoleKey.W))
+            {
+                Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop-1);
+            }
+            if ((input == ConsoleKey.A))
+            {
+                Console.SetCursorPosition(Console.CursorLeft-1, Console.CursorTop);
+            }
+            if ((input == ConsoleKey.D))
+            {
+                Console.SetCursorPosition(Console.CursorLeft+1, Console.CursorTop);
             }
         }
     }
