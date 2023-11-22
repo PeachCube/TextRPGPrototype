@@ -51,24 +51,26 @@ namespace TextRPGPrototype_NathanPeach
         }
         static void PlayerControl()
         {
+            
             Console.ReadKey(true);
             ConsoleKey input = Console.ReadKey(true).Key;
-            if ((input == ConsoleKey.S))
+            if ((input == ConsoleKey.S) && (display == ))
             {
-                Console.SetCursorPosition(Console.CursorLeft,Console.CursorTop+1);
+                Console.SetCursorPosition(Console.CursorLeft,Console.CursorTop + 1);
             }
-            if ((input == ConsoleKey.W))
+            if (input == ConsoleKey.W)
             {
-                Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop-1);
+                Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop - 1);
             }
-            if ((input == ConsoleKey.A))
+            if (input == ConsoleKey.A)
             {
-                Console.SetCursorPosition(Console.CursorLeft-1, Console.CursorTop);
+                Console.SetCursorPosition(Console.CursorLeft - 1, Console.CursorTop);
             }
-            if ((input == ConsoleKey.D))
+            if (input == ConsoleKey.D)
             {
-                Console.SetCursorPosition(Console.CursorLeft+1, Console.CursorTop);
+                Console.SetCursorPosition(Console.CursorLeft + 1, Console.CursorTop);
             }
+            
         }
     }
 }
