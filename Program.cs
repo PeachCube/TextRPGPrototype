@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.IO;
 using System.ComponentModel;
 using System.Threading;
+using System.Reflection;
 
 namespace TextRPGPrototype_NathanPeach
 {
@@ -16,8 +17,9 @@ namespace TextRPGPrototype_NathanPeach
         static bool gameOver;
         static string map = @"Map.txt";
         static string[] display = File.ReadAllLines(map);
+        static string[,] mapx = new string[,] { {  }, {  } };
         //Global variables
-
+        
         static void Main(string[] args)
         {
             Console.SetWindowSize(130,30);
@@ -51,10 +53,8 @@ namespace TextRPGPrototype_NathanPeach
         }
         static void PlayerControl()
         {
-            
-            Console.ReadKey(true);
             ConsoleKey input = Console.ReadKey(true).Key;
-            if ((input == ConsoleKey.S) && (display == ))
+            if (input == ConsoleKey.S)
             {
                 Console.SetCursorPosition(Console.CursorLeft,Console.CursorTop + 1);
             }
