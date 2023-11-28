@@ -14,10 +14,9 @@ namespace TextRPGPrototype_NathanPeach
     {
         //Global variables
         static int health;//(player health only)
-        static bool gameOver;
-        static string map = @"Map.txt";
-        static string[] display = File.ReadAllLines(map);
-        static string[,] mapx = new string[,] { {  }, {  } };
+        static bool gameOver; 
+        static string[] display = File.ReadAllLines(@"Map.txt");
+        static string[,] mapx = new string[,] { {  },{  } };
         //Global variables
         
         static void Main(string[] args)
@@ -44,8 +43,7 @@ namespace TextRPGPrototype_NathanPeach
                 string row = display[y];
                 for (int x = 0; x < row.Length; x++)
                 {
-                    char tile = row[x];
-                    Console.Write(tile);
+                    Console.Write(row[x]);
                     //Thread.Sleep(1);
                 }
                 Console.WriteLine();
