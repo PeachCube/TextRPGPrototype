@@ -46,13 +46,25 @@ namespace TextRPGPrototype_NathanPeach
                 PlayerControl();
             }
         }
-        static void DisplayMap()
+        static void DisplayMap()//uses a nested for loop to display each coordinate in the map array and color characters according to if statements
         {
             for (int y = 0; y < height; y++)
             {
                 for (int x = 0; x < width; x++)
                 {
-                    Console.Write(map[x,y]);//uses a nested for loop to display each coordinate in the map array
+                    if (map[x,y] == char.Parse("░"))
+                    {
+                        Console.ForegroundColor = ConsoleColor.DarkGray;
+                    }
+                    else if (map[x, y] == char.Parse("▓"))
+                    {
+                        Console.ForegroundColor = ConsoleColor.Gray;
+                    }
+                    else if (map[x, y] == char.Parse("X"))
+                    {
+                        Console.ForegroundColor = ConsoleColor.DarkGreen;
+                    }
+                    Console.Write(map[x,y]);
                 }
                 Console.WriteLine();
             }
