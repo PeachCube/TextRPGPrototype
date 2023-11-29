@@ -37,6 +37,7 @@ namespace TextRPGPrototype_NathanPeach
             map = new char[width,height];//a 2d array with the same dimensions as display
             wall = char.Parse("▓");//sets the "wall" variable char equal to "▓"
             water = char.Parse("~");//sets the "water" variable char equal to "~"
+            health = 10;
             
             for (int y = 0; y < height; y++)
             {
@@ -48,6 +49,7 @@ namespace TextRPGPrototype_NathanPeach
 
             Console.SetWindowSize(width+1,height+10);
             DisplayMap();
+            DisplayStats();
             PlayerXY.x = 10;//player starting position
             PlayerXY.y = 10;
 
@@ -55,6 +57,7 @@ namespace TextRPGPrototype_NathanPeach
             while (gameOver == false)
             {
                 PlayerControl();
+                DisplayStats();
             }
         }
         static void DisplayMap()//uses a nested for loop to display each coordinate in the map array and color characters according to if statements
@@ -85,16 +88,28 @@ namespace TextRPGPrototype_NathanPeach
                 Console.WriteLine();
             }
         }
-        static void DisplayHUD()
+        static void DisplayStats()
         {
+            Console.SetCursorPosition(0,height+1);
+            Console.WriteLine(PlayerXY.x + " " + PlayerXY.y);//test
+            Console.WriteLine();
+            for (int i = 0; i < health; i ++)
+            {
+                Console.BackgroundColor = ConsoleColor.Red;
+                Console.ForegroundColor = ConsoleColor.Red;
+                Console.Write("▓");
+            }
+            Console.BackgroundColor = ConsoleColor.Black;
+            Console.WriteLine(" HP");
+            Console.ForegroundColor = ConsoleColor.White;
+
+
+
 
         }
-        
-        //&& (PlayerXY.y < height - 1)
-        
         static void PlayerControl()
         {
-            Console.SetCursorPosition(PlayerXY.x, PlayerXY.y);
+            //Console.SetCursorPosition(PlayerXY.x, PlayerXY.y);
             ConsoleKey input = Console.ReadKey(true).Key;
             if ((input == ConsoleKey.S) && (map[PlayerXY.x, PlayerXY.y + 1] != wall))//if an "S" input is detected on the keyboard, and the char 1 unit above the player  
             {                                                                        //position in the map array is not a wall, change the player position y value by + 1.
