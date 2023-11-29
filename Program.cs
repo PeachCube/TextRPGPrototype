@@ -7,6 +7,7 @@ using System.IO;
 using System.ComponentModel;
 using System.Threading;
 using System.Reflection;
+using System.Net.Mime;
 
 namespace TextRPGPrototype_NathanPeach
 {
@@ -19,6 +20,13 @@ namespace TextRPGPrototype_NathanPeach
         static char[,] map;
         static int width;
         static int height;
+        static char wall;
+        public struct PlayerXY
+        {
+        static public int x;
+        static public int y;
+        //static public int[,] position = new int[x, y];
+        }
         //Global variables
 
         static void Main(string[] args)
@@ -27,7 +35,8 @@ namespace TextRPGPrototype_NathanPeach
             height = display.Length;//the length of the display array from line 0 to the last line (the height of the array)
             width = display[0].Length;//the length of a single line in the display array (the width of the line)
             map = new char[width,height];//a 2d array with the same dimensions as display
-            
+            wall = char.Parse("▓");//sets the "wall" char equal to "▓"
+
             for (int y = 0; y < height; y++)
             {
                 for (int x = 0; x < width; x++)
@@ -38,8 +47,9 @@ namespace TextRPGPrototype_NathanPeach
 
             Console.SetWindowSize(width+1,height+1);
             DisplayMap();
-            Console.SetCursorPosition(10,10);//player starting position
-            
+            PlayerXY.x = 10;//player starting position
+            PlayerXY.y = 10;
+
             //Game loop
             while (gameOver == false)
             {
@@ -56,11 +66,11 @@ namespace TextRPGPrototype_NathanPeach
                     {
                         Console.ForegroundColor = ConsoleColor.DarkGray;
                     }
-                    else if (map[x, y] == char.Parse("▓"))
+                    else if (map[x,y] == wall)
                     {
                         Console.ForegroundColor = ConsoleColor.Gray;
                     }
-                    else if (map[x, y] == char.Parse("X"))
+                    else if (map[x,y] == char.Parse("X"))
                     {
                         Console.ForegroundColor = ConsoleColor.DarkGreen;
                     }
@@ -71,22 +81,23 @@ namespace TextRPGPrototype_NathanPeach
         }
         static void PlayerControl()
         {
+            Console.SetCursorPosition(PlayerXY.x, PlayerXY.y);
             ConsoleKey input = Console.ReadKey(true).Key;
-            if (input == ConsoleKey.S)
+            if ((input == ConsoleKey.S) && (map[PlayerXY.x, PlayerXY.y + 1] != wall))
             {
-                Console.SetCursorPosition(Console.CursorLeft,Console.CursorTop + 1);
+                PlayerXY.y += 1;
             }
-            if (input == ConsoleKey.W)
+            if ((input == ConsoleKey.W) && (map[PlayerXY.x, PlayerXY.y - 1] != wall))
             {
-                Console.SetCursorPosition(Console.CursorLeft, Console.CursorTop - 1);
+                PlayerXY.y -= 1;
             }
-            if (input == ConsoleKey.A)
+            if ((input == ConsoleKey.A) && (map[PlayerXY.x - 1, PlayerXY.y] != wall))
             {
-                Console.SetCursorPosition(Console.CursorLeft - 1, Console.CursorTop);
+                PlayerXY.x -= 1;
             }
-            if (input == ConsoleKey.D)
+            if ((input == ConsoleKey.D) && (map[PlayerXY.x + 1, PlayerXY.y] != wall))
             {
-                Console.SetCursorPosition(Console.CursorLeft + 1, Console.CursorTop);
+                PlayerXY.x += 1;
             }
         }
     }
